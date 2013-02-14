@@ -7,14 +7,8 @@
 @end
 
 
-@interface FMResultSet (Private)
-- (NSMutableDictionary *)columnNameToIndexMap;
-- (void)setColumnNameToIndexMap:(NSMutableDictionary *)value;
-@end
-
 @implementation FMResultSet
 @synthesize query=_query;
-@synthesize columnNameToIndexMap=_columnNameToIndexMap;
 @synthesize statement=_statement;
 
 + (id)resultSetWithStatement:(FMStatement *)statement usingParentDatabase:(FMDatabase*)aDB {
@@ -61,20 +55,17 @@
     return sqlite3_column_count([_statement statement]);
 }
 
-- (void)setupColumnNames {
-    
+- (NSMutableDictionary *)columnNameToIndexMap {
     if (!_columnNameToIndexMap) {
-        [self setColumnNameToIndexMap:[NSMutableDictionary dictionary]];
-    }    
-    
-    int columnCount = sqlite3_column_count([_statement statement]);
-    
-    int columnIdx = 0;
-    for (columnIdx = 0; columnIdx < columnCount; columnIdx++) {
-        [_columnNameToIndexMap setObject:[NSNumber numberWithInt:columnIdx]
-                                 forKey:[[NSString stringWithUTF8String:sqlite3_column_name([_statement statement], columnIdx)] lowercaseString]];
+        int columnCount = sqlite3_column_count([_statement statement]);
+        _columnNameToIndexMap = [[NSMutableDictionary alloc] initWithCapacity:(NSUInteger)columnCount];
+        int columnIdx = 0;
+        for (columnIdx = 0; columnIdx < columnCount; columnIdx++) {
+            [_columnNameToIndexMap setObject:[NSNumber numberWithInt:columnIdx]
+                                      forKey:[[NSString stringWithUTF8String:sqlite3_column_name([_statement statement], columnIdx)] lowercaseString]];
+        }
     }
-    _columnNamesSetup = YES;
+    return _columnNameToIndexMap;
 }
 
 - (void)kvcMagic:(id)object {
@@ -100,16 +91,12 @@
 
 - (NSDictionary*)resultDict {
     
-    int num_cols = sqlite3_data_count([_statement statement]);
+    NSUInteger num_cols = (NSUInteger)sqlite3_data_count([_statement statement]);
     
     if (num_cols > 0) {
         NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:num_cols];
         
-        if (!_columnNamesSetup) {
-            [self setupColumnNames];
-        }
-        
-        NSEnumerator *columnNames = [_columnNameToIndexMap keyEnumerator];
+        NSEnumerator *columnNames = [[self columnNameToIndexMap] keyEnumerator];
         NSString *columnName = nil;
         while ((columnName = [columnNames nextObject])) {
             id objectValue = [self objectForColumnName:columnName];
@@ -129,7 +116,7 @@
 
 - (NSDictionary*)resultDictionary {
     
-    int num_cols = sqlite3_data_count([_statement statement]);
+    NSUInteger num_cols = (NSUInteger)sqlite3_data_count([_statement statement]);
     
     if (num_cols > 0) {
         NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:num_cols];
@@ -219,14 +206,9 @@
 }
 
 - (int)columnIndexForName:(NSString*)columnName {
-    
-    if (!_columnNamesSetup) {
-        [self setupColumnNames];
-    }
-    
     columnName = [columnName lowercaseString];
     
-    NSNumber *n = [_columnNameToIndexMap objectForKey:columnName];
+    NSNumber *n = [[self columnNameToIndexMap] objectForKey:columnName];
     
     if (n) {
         return [n intValue];
@@ -333,7 +315,7 @@
     
     int dataSize = sqlite3_column_bytes([_statement statement], columnIdx);
     
-    NSMutableData *data = [NSMutableData dataWithLength:dataSize];
+    NSMutableData *data = [NSMutableData dataWithLength:(NSUInteger)dataSize];
     
     memcpy([data mutableBytes], sqlite3_column_blob([_statement statement], columnIdx), dataSize);
     
@@ -353,7 +335,7 @@
     
     int dataSize = sqlite3_column_bytes([_statement statement], columnIdx);
     
-    NSData *data = [NSData dataWithBytesNoCopy:(void *)sqlite3_column_blob([_statement statement], columnIdx) length:dataSize freeWhenDone:NO];
+    NSData *data = [NSData dataWithBytesNoCopy:(void *)sqlite3_column_blob([_statement statement], columnIdx) length:(NSUInteger)dataSize freeWhenDone:NO];
     
     return data;
 }
@@ -417,6 +399,14 @@
 
 - (void)setParentDB:(FMDatabase *)newDb {
     _parentDB = newDb;
+}
+
+- (id)objectAtIndexedSubscript:(int)columnIdx {
+    return [self objectForColumnIndex:columnIdx];
+}
+
+- (id)objectForKeyedSubscript:(NSString *)columnName {
+    return [self objectForColumnName:columnName];
 }
 
 

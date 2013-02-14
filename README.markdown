@@ -42,9 +42,9 @@ Before you can interact with the database, it must be opened.  Opening fails if 
 	
 ### Executing Updates
 
-Any sort of SQL statement which is not a `SELECT` statement qualifies as an update.  This includes `CREATE`, `PRAGMA`, `UPDATE`, `INSERT`, `ALTER`, `COMMIT`, `BEGIN`, `DETACH`, `DELETE`, `DROP`, `END`, `EXPLAIN`, `VACUUM`, and `REPLACE` statements (plus many more).  Basically, if your SQL statement does not begin with `SELECT`, it is an update statement.
+Any sort of SQL statement which is not a `SELECT` statement qualifies as an update.  This includes `CREATE`, `UPDATE`, `INSERT`, `ALTER`, `COMMIT`, `BEGIN`, `DETACH`, `DELETE`, `DROP`, `END`, `EXPLAIN`, `VACUUM`, and `REPLACE` statements (plus many more).  Basically, if your SQL statement does not begin with `SELECT`, it is an update statement.
 
-Executing updates returns a single value, a `BOOL`.  A return value of `YES` means the update was successfully executed, and a return value of `NO` means that some error was encountered.  If you use the `-[FMDatabase executeUpdate:error:withArgumentsInArray:orVAList:]` method to execute an update, you may supply an `NSError **` that will be filled in if execution fails.  Otherwise you may invoke the `-lastErrorMessage` and `-lastErrorCode` methods to retrieve more information.
+Executing updates returns a single value, a `BOOL`.  A return value of `YES` means the update was successfully executed, and a return value of `NO` means that some error was encountered.  You may invoke the `-lastErrorMessage` and `-lastErrorCode` methods to retrieve more information.
 
 ### Executing Queries
 
@@ -175,7 +175,9 @@ An easy way to wrap things up in a transaction can be done like this:
     }];
 
 
-FMDatabaseQueue will make a serialized GCD queue in the background and execute the blocks you pass to the GCD queue.  This means if you call your FMDatabaseQueue's methods from multiple threads at the same time GDC will execute them in the order they are received.  This means queries and updates won't step on each other's toes, and every one is happy.
+FMDatabaseQueue will run the blocks on a serialized queue (hence the name of the class).  So if you call FMDatabaseQueue's methods from multiple threads at the same time, they will be executed in the order they are received.  This way queries and updates won't step on each other's toes, and every one is happy.
+
+**Note:** The calls to FMDatabaseQueue's methods are blocking.  So even though you are passing along blocks, they will **not** be run on another thread.
 
 ## Making custom sqlite functions, based on blocks.
 

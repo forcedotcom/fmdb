@@ -22,12 +22,11 @@
     
     NSString            *_query;
     NSMutableDictionary *_columnNameToIndexMap;
-    BOOL                _columnNamesSetup;
 }
 
-@property (retain) NSString *query;
-@property (retain) NSMutableDictionary *columnNameToIndexMap;
-@property (retain) FMStatement *statement;
+@property (atomic, retain) NSString *query;
+@property (readonly) NSMutableDictionary *columnNameToIndexMap;
+@property (atomic, retain) FMStatement *statement;
 
 + (id)resultSetWithStatement:(FMStatement *)statement usingParentDatabase:(FMDatabase*)aDB;
 
@@ -76,6 +75,9 @@
 // returns one of NSNumber, NSString, NSData, or NSNull
 - (id)objectForColumnName:(NSString*)columnName;
 - (id)objectForColumnIndex:(int)columnIdx;
+
+- (id)objectForKeyedSubscript:(NSString *)columnName;
+- (id)objectAtIndexedSubscript:(int)columnIdx;
 
 /*
 If you are going to use this data after you iterate over the next row, or after you close the
