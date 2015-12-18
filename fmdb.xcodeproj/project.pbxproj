@@ -73,6 +73,19 @@
 		EE42910912B42FD00088BD94 /* FMResultSet.h in Headers */ = {isa = PBXBuildFile; fileRef = CCC24EBF0A13E34D00A6D3E3 /* FMResultSet.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EE42910A12B42FD20088BD94 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC24EC00A13E34D00A6D3E3 /* FMResultSet.m */; };
 		EE42910D12B42FFA0088BD94 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EE42910C12B42FFA0088BD94 /* libsqlite3.dylib */; };
+		FD52C1221C237CB800DBF76E /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC24EC00A13E34D00A6D3E3 /* FMResultSet.m */; };
+		FD52C1231C237CB800DBF76E /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC24EBB0A13E34D00A6D3E3 /* FMDatabase.m */; };
+		FD52C1241C237CB800DBF76E /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9E4EB813B31188005F9210 /* FMDatabasePool.m */; };
+		FD52C1251C237CB800DBF76E /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = CC47A00E148581E9002CCDAB /* FMDatabaseQueue.m */; };
+		FD52C1261C237CB800DBF76E /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = CC50F2CB0DF9183600E4AAAE /* FMDatabaseAdditions.m */; };
+		FD52C1281C237CB800DBF76E /* SalesforceSDKCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0021C51C066C1F0079DCA4 /* SalesforceSDKCore.framework */; };
+		FD52C1291C237CB800DBF76E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6290CBB6188FE836009790F8 /* Foundation.framework */; };
+		FD52C12C1C237CB800DBF76E /* FMDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 8314AF3218CD73D600EC0E25 /* FMDB.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FD52C12D1C237CB800DBF76E /* FMDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = CCC24EBA0A13E34D00A6D3E3 /* FMDatabase.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FD52C12E1C237CB800DBF76E /* FMDatabaseAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = CC50F2CC0DF9183600E4AAAE /* FMDatabaseAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FD52C12F1C237CB800DBF76E /* FMDatabasePool.h in Headers */ = {isa = PBXBuildFile; fileRef = CC9E4EB713B31188005F9210 /* FMDatabasePool.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FD52C1301C237CB800DBF76E /* FMDatabaseQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = CC47A00D148581E9002CCDAB /* FMDatabaseQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FD52C1311C237CB800DBF76E /* FMResultSet.h in Headers */ = {isa = PBXBuildFile; fileRef = CCC24EBF0A13E34D00A6D3E3 /* FMResultSet.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -146,6 +159,20 @@
 			remoteGlobalIDString = CEA8825E1C18F722008D871B;
 			remoteInfo = SalesforceSDKCoreStatic;
 		};
+		FD52C13B1C237CB800DBF76E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE0021BC1C066C1E0079DCA4 /* SalesforceSDKCore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = FDDF34211C23745000134333;
+			remoteInfo = SalesforceSDKCoretvOS;
+		};
+		FD52C13D1C237CC400DBF76E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE0021BC1C066C1E0079DCA4 /* SalesforceSDKCore.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = FDDF335D1C23745000134333;
+			remoteInfo = SalesforceSDKCoretvOS;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -169,6 +196,15 @@
 			runOnlyForDeploymentPostprocessing = 1;
 		};
 		CEA884B61C1A24B1008D871B /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FD52C12A1C237CB800DBF76E /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "include/$(PRODUCT_NAME)";
@@ -232,6 +268,7 @@
 		D4A740A11A7046330058EBEE /* FMDatabaseFTS3WithModuleNameTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseFTS3WithModuleNameTests.m; sourceTree = "<group>"; };
 		EE4290EF12B42F870088BD94 /* libFMDB.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFMDB.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE42910C12B42FFA0088BD94 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		FD52C1351C237CB800DBF76E /* libFMDB.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFMDB.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -278,6 +315,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				EE42910D12B42FFA0088BD94 /* libsqlite3.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FD52C1271C237CB800DBF76E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FD52C1281C237CB800DBF76E /* SalesforceSDKCore.framework in Frameworks */,
+				FD52C1291C237CB800DBF76E /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,6 +376,7 @@
 				BF5D041618416BB2008C5AA9 /* Tests.xctest */,
 				6290CBB5188FE836009790F8 /* libFMDB-IOS.a */,
 				CEA884C11C1A24B1008D871B /* libFMDB.a */,
+				FD52C1351C237CB800DBF76E /* libFMDB.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -451,6 +498,7 @@
 			isa = PBXGroup;
 			children = (
 				CE0021C51C066C1F0079DCA4 /* SalesforceSDKCore.framework */,
+				FD52C13C1C237CB800DBF76E /* SalesforceSDKCore.framework */,
 				CE0021C71C066C1F0079DCA4 /* SalesforceSDKCoreTests.xctest */,
 				CE0021C91C066C1F0079DCA4 /* SalesforceSDKCoreTestApp.app */,
 				CE0021CB1C066C1F0079DCA4 /* SalesforceSDKCoreTestAppTests.xctest */,
@@ -498,6 +546,19 @@
 				8314AF3318CD73D600EC0E25 /* FMDB.h in Headers */,
 				CC9E4EBA13B31188005F9210 /* FMDatabasePool.h in Headers */,
 				CC47A00F148581E9002CCDAB /* FMDatabaseQueue.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FD52C12B1C237CB800DBF76E /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FD52C12C1C237CB800DBF76E /* FMDB.h in Headers */,
+				FD52C12D1C237CB800DBF76E /* FMDatabase.h in Headers */,
+				FD52C12E1C237CB800DBF76E /* FMDatabaseAdditions.h in Headers */,
+				FD52C12F1C237CB800DBF76E /* FMDatabasePool.h in Headers */,
+				FD52C1301C237CB800DBF76E /* FMDatabaseQueue.h in Headers */,
+				FD52C1311C237CB800DBF76E /* FMResultSet.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -597,6 +658,25 @@
 			productReference = EE4290EF12B42F870088BD94 /* libFMDB.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		FD52C11E1C237CB800DBF76E /* FMDB-tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FD52C1321C237CB800DBF76E /* Build configuration list for PBXNativeTarget "FMDB-tvOS" */;
+			buildPhases = (
+				FD52C1211C237CB800DBF76E /* Sources */,
+				FD52C1271C237CB800DBF76E /* Frameworks */,
+				FD52C12A1C237CB800DBF76E /* CopyFiles */,
+				FD52C12B1C237CB800DBF76E /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FD52C13E1C237CC400DBF76E /* PBXTargetDependency */,
+			);
+			name = "FMDB-tvOS";
+			productName = "FMDB-IOS";
+			productReference = FD52C1351C237CB800DBF76E /* libFMDB.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -636,6 +716,7 @@
 				BF5D041518416BB2008C5AA9 /* Tests */,
 				6290CBB4188FE836009790F8 /* FMDB-IOS */,
 				CEA884AA1C1A24B1008D871B /* FMDB-IOS-Static */,
+				FD52C11E1C237CB800DBF76E /* FMDB-tvOS */,
 			);
 		};
 /* End PBXProject section */
@@ -674,6 +755,13 @@
 			fileType = archive.ar;
 			path = libSalesforceSDKCore.a;
 			remoteRef = CEA884C71C1A24B1008D871B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		FD52C13C1C237CB800DBF76E /* SalesforceSDKCore.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SalesforceSDKCore.framework;
+			remoteRef = FD52C13B1C237CB800DBF76E /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -760,6 +848,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FD52C1211C237CB800DBF76E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FD52C1221C237CB800DBF76E /* FMResultSet.m in Sources */,
+				FD52C1231C237CB800DBF76E /* FMDatabase.m in Sources */,
+				FD52C1241C237CB800DBF76E /* FMDatabasePool.m in Sources */,
+				FD52C1251C237CB800DBF76E /* FMDatabaseQueue.m in Sources */,
+				FD52C1261C237CB800DBF76E /* FMDatabaseAdditions.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -787,6 +887,11 @@
 			isa = PBXTargetDependency;
 			name = SalesforceSDKCoreStatic;
 			targetProxy = CEA884C91C1A24C1008D871B /* PBXContainerItemProxy */;
+		};
+		FD52C13E1C237CC400DBF76E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SalesforceSDKCoretvOS;
+			targetProxy = FD52C13D1C237CC400DBF76E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1124,6 +1229,66 @@
 			};
 			name = Release;
 		};
+		FD52C1331C237CB800DBF76E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/FMDB_IOS.dst;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_CFLAGS = "-DSQLITE_HAS_CODEC";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = FMDB;
+				PUBLIC_HEADERS_FOLDER_PATH = "Headers/${PROJECT_NAME}";
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		FD52C1341C237CB800DBF76E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/FMDB_IOS.dst;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_CFLAGS = "-DSQLITE_HAS_CODEC";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = FMDB;
+				PUBLIC_HEADERS_FOLDER_PATH = "Headers/${PROJECT_NAME}";
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1177,6 +1342,15 @@
 			buildConfigurations = (
 				EE4290F012B42F880088BD94 /* Debug */,
 				EE4290F112B42F880088BD94 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FD52C1321C237CB800DBF76E /* Build configuration list for PBXNativeTarget "FMDB-tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FD52C1331C237CB800DBF76E /* Debug */,
+				FD52C1341C237CB800DBF76E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
