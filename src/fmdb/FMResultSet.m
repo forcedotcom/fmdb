@@ -1,12 +1,9 @@
 #import "FMResultSet.h"
 #import "FMDatabase.h"
-#import "unistd.h"
-#import "SFSDKSmartStoreLogger.h"
+#import <unistd.h>
 
 #if FMDB_SQLITE_STANDALONE
 #import <sqlite3/sqlite3.h>
-#elif defined SQLITE_HAS_CODEC
-#import "sqlite3.h"
 #else
 #import <sqlite3.h>
 #endif
@@ -64,7 +61,7 @@
     // we don't need this anymore... (i think)
     //[_parentDB setInUse:NO];
     [_parentDB resultSetDidClose:self];
-    _parentDB = nil;
+    [self setParentDB:nil];
 }
 
 - (int)columnCount {
@@ -122,7 +119,7 @@
         return FMDBReturnAutoreleased([dict copy]);
     }
     else {
-        [SFSDKSmartStoreLogger w:[self class] format:@"Warning: There seem to be no columns in this set."];
+        NSLog(@"Warning: There seem to be no columns in this set.");
     }
     
     return nil;
@@ -150,7 +147,7 @@
         return dict;
     }
     else {
-        [SFSDKSmartStoreLogger w:[self class] format:@"Warning: There seem to be no columns in this set."];
+        NSLog(@"Warning: There seem to be no columns in this set.");
     }
     
     return nil;
@@ -168,8 +165,8 @@
     int rc = sqlite3_step([_statement statement]);
     
     if (SQLITE_BUSY == rc || SQLITE_LOCKED == rc) {
-        [SFSDKSmartStoreLogger d:[self class] format:@"%s:%d Database busy (%@)", __FUNCTION__, __LINE__, [_parentDB databasePath]];
-        [SFSDKSmartStoreLogger d:[self class] format:@"Database bus"];
+        NSLog(@"%s:%d Database busy (%@)", __FUNCTION__, __LINE__, [_parentDB databasePath]);
+        NSLog(@"Database busy");
         if (outErr) {
             *outErr = [_parentDB lastError];
         }
@@ -178,14 +175,14 @@
         // all is well, let's return.
     }
     else if (SQLITE_ERROR == rc) {
-        [SFSDKSmartStoreLogger e:[self class] format:@"Error calling sqlite3_step (%d: %s) rs", rc, sqlite3_errmsg([_parentDB sqliteHandle])];
+        NSLog(@"Error calling sqlite3_step (%d: %s) rs", rc, sqlite3_errmsg([_parentDB sqliteHandle]));
         if (outErr) {
             *outErr = [_parentDB lastError];
         }
     }
     else if (SQLITE_MISUSE == rc) {
         // uh oh.
-        [SFSDKSmartStoreLogger e:[self class] format:@"Error calling sqlite3_step (%d: %s) rs", rc, sqlite3_errmsg([_parentDB sqliteHandle])];
+        NSLog(@"Error calling sqlite3_step (%d: %s) rs", rc, sqlite3_errmsg([_parentDB sqliteHandle]));
         if (outErr) {
             if (_parentDB) {
                 *outErr = [_parentDB lastError];
@@ -201,7 +198,7 @@
     }
     else {
         // wtf?
-        [SFSDKSmartStoreLogger e:[self class] format:@"Unknown error calling sqlite3_step (%d: %s) rs", rc, sqlite3_errmsg([_parentDB sqliteHandle])];
+        NSLog(@"Unknown error calling sqlite3_step (%d: %s) rs", rc, sqlite3_errmsg([_parentDB sqliteHandle]));
         if (outErr) {
             *outErr = [_parentDB lastError];
         }
@@ -227,7 +224,9 @@
     if (n != nil) {
         return [n intValue];
     }
-    [SFSDKSmartStoreLogger w:[self class] format:@"Warning: I could not find the column named '%@'.", columnName];
+    
+    NSLog(@"Warning: I could not find the column named '%@'.", columnName);
+    
     return -1;
 }
 
