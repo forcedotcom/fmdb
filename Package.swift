@@ -5,22 +5,32 @@ import PackageDescription
 
 let package = Package(
     name: "FMDB",
+    platforms: [
+        .iOS(.v12),
+        .macOS(.v10_13),
+    ],
     products: [
         // Products define the executables and libraries produced by a package, and make them visible to other packages.
         .library(name: "FMDB", targets: ["FMDB"]),
     ],
     dependencies: [
-        // Dependencies declare other packages that this package depends on.
-        // .package(url: /* package url */, from: "1.0.0"),
+        // Add SQLCipher SPM dependency
+        .package(url: "https://github.com/sqlcipher/SQLCipher.swift.git", exact: "4.10.0")
     ],
     targets: [
-        // Targets are the basic building blocks of a package. A target can define a module or a test suite.
-        // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(
             name: "FMDB",
-            dependencies: [],
+            dependencies: [
+                .product(name: "SQLCipher", package: "sqlcipher")
+            ],
             path: "src/fmdb",
-            resources: [.process("../../privacy/PrivacyInfo.xcprivacy")],
-            publicHeadersPath: "."),
+	    resources: [.process("../../privacy/PrivacyInfo.xcprivacy")],
+            publicHeadersPath: ".",
+            cSettings: [
+                .define("SQLITE_HAS_CODEC"),
+                .define("HAVE_USLEEP", to: "1"),
+                .define("SQLCIPHER_CRYPTO")
+            ]
+        )
     ]
 )
