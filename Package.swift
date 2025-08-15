@@ -21,7 +21,7 @@ let package = Package(
         .target(
             name: "FMDB",
             dependencies: [
-                .product(name: "SQLCipher", package: "sqlcipher")
+                .product(name: "SQLCipher", package: "SQLCipher.swift")
             ],
             path: "src/fmdb",
 	    resources: [.process("../../privacy/PrivacyInfo.xcprivacy")],
