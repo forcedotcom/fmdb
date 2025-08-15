@@ -302,7 +302,8 @@ int main (int argc, const char * argv[]) {
     [db executeUpdate:@"create table blobTable (a text, b blob)"];
     
     // let's read in an image from safari's app bundle.
-    NSData *safariCompass = [NSData dataWithContentsOfFile:@"/Applications/Safari.app/Contents/Resources/compass.icns"];
+    NSData *safariCompass = [NSData dataWithContentsOfFile:@"/Applications/Safari.app/Contents/Resources/AppIcon.icns"];
+    assert(safariCompass);
     if (safariCompass) {
         [db executeUpdate:@"insert into blobTable (a, b) values (?,?)", @"safari's compass", safariCompass];
         
@@ -543,7 +544,8 @@ int main (int argc, const char * argv[]) {
     [db executeUpdate:@"create table nulltest2 (s text, d data, i integer, f double, b integer)"];
     
     // grab the data for this again, since we overwrote it with some memory that has since disapeared.
-    safariCompass = [NSData dataWithContentsOfFile:@"/Applications/Safari.app/Contents/Resources/compass.icns"];
+    safariCompass = [NSData dataWithContentsOfFile:@"/Applications/Safari.app/Contents/Resources/AppIcon.icns"];
+    assert(safariCompass);
     
     [db executeUpdate:@"insert into nulltest2 (s, d, i, f, b) values (?, ?, ?, ?, ?)" , @"Hi", safariCompass, [NSNumber numberWithInt:12], [NSNumber numberWithFloat:4.4f], [NSNumber numberWithBool:YES]];
     [db executeUpdate:@"insert into nulltest2 (s, d, i, f, b) values (?, ?, ?, ?, ?)" , nil, nil, nil, nil, [NSNull null]];
@@ -1087,7 +1089,7 @@ int main (int argc, const char * argv[]) {
  This test checks the fixes that address https://github.com/ccgus/fmdb/issues/6
  */
 
-void testStatementCaching() {
+void testStatementCaching(void) {
     
     FMDatabase *db = [FMDatabase databaseWithPath:nil]; // use in-memory DB
     [db open];
@@ -1462,7 +1464,7 @@ void testOneDateFormat( FMDatabase *db, NSDate *testDate ) {
     [rs close];
 }
 
-void testDateFormat() {
+void testDateFormat(void) {
     
     FMDatabase *db = [FMDatabase databaseWithPath:nil]; // use in-memory DB
     [db open];
@@ -1490,7 +1492,7 @@ void testDateFormat() {
  developer(s) know either via the github bug reporter or the mailing list.
  */
 
-void FMDBReportABugFunction() {
+void FMDBReportABugFunction(void) {
     
     NSString *dbPath = @"/tmp/bugreportsample.db";
     
