@@ -10,11 +10,7 @@
 #import "FMDatabaseAdditions.h"
 #import "TargetConditionals.h"
 
-#if FMDB_SQLITE_STANDALONE
-#import <sqlite3/sqlite3.h>
-#else
-#import <sqlite3.h>
-#endif
+@import SQLCipher;
 
 @interface FMDatabase (PrivateStuff)
 - (FMResultSet * _Nullable)executeQuery:(NSString *)sql withArgumentsInArray:(NSArray * _Nullable)arrayArgs orDictionary:(NSDictionary * _Nullable)dictionaryArgs orVAList:(va_list)args shouldBind:(BOOL)shouldBind;
