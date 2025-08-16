@@ -15,7 +15,7 @@ let package = Package(
     ],
     dependencies: [
         // Add SQLCipher SPM dependency
-        .package(url: "https://github.com/sqlcipher/SQLCipher.swift.git", exact: "4.10.0")
+        .package(url: "https://github.com/sqlcipher/SQLCipher.swift.git", from: "4.10.0")
     ],
     targets: [
         .target(
