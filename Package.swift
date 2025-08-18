@@ -6,8 +6,12 @@ import PackageDescription
 let package = Package(
     name: "FMDB",
     platforms: [
-        .iOS(.v13),
-        .macOS(.v10_13),
+        .macOS(.v10_14),
+	.iOS(.v13),
+	.macCatalyst(.v13),
+	.watchOS(.v8),
+	.tvOS(.v15),
+	.visionOS(.v1)
     ],
     products: [
         // Products define the executables and libraries produced by a package, and make them visible to other packages.
