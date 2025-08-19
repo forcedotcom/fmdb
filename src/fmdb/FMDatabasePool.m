@@ -6,11 +6,7 @@
 //  Copyright 2011 Flying Meat Inc. All rights reserved.
 //
 
-#if FMDB_SQLITE_STANDALONE
-#import <sqlite3/sqlite3.h>
-#else
-#import <sqlite3.h>
-#endif
+@import SQLCipher;
 
 #import "FMDatabasePool.h"
 #import "FMDatabase.h"
